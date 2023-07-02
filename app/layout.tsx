@@ -1,6 +1,8 @@
 import "./globals.css";
 import { Figtree } from "next/font/google";
 
+import Sidebar from "@/components/Sidebar";
+
 const font = Figtree({ subsets: ["latin"] });
 
 export const metadata = {
@@ -15,7 +17,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={font.className}>{children}</body>
+      <body className={font.className}>
+        <div className="flex h-full">
+          <Sidebar />
+          <main className="flex-1 h-full overflow-y-auto py-2">{children}</main>
+        </div>
+      </body>
     </html>
   );
 }
