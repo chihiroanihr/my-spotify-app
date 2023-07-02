@@ -2,3 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body,
+:root {
+  height: 100%;
+  background-color: black;
+  color-scheme: dark; /* default text color will become white */
+}
