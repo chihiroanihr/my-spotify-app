@@ -2,12 +2,16 @@
 
 import { twMerge } from "tailwind-merge";
 import { useRouter } from "next/navigation";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { toast } from "react-hot-toast";
 import { HiHome } from "react-icons/hi";
 import { BiSearch } from "react-icons/bi";
 import { RxCaretLeft, RxCaretRight } from "react-icons/rx";
 import { FaUserAlt } from "react-icons/fa";
 
 import Button from "./Button";
+import useAuthModal from "@/hooks/useAuthModal";
+import { useUser } from "@/hooks/useUser";
 
 interface HeaderProps {
   children: React.ReactNode;
@@ -16,9 +20,20 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ children, className }) => {
   const router = useRouter();
+  const supabaseClient = useSupabaseClient();
+  const authModal = useAuthModal();
+  const { user, subscription } = useUser();
 
-  const handleLogout = () => {
-    // Implement Handle Logout
+  const handleLogout = async () => {
+    const { error } = await supabaseClient.auth.signOut();
+
+    // TODO: Reset any currently playing songs (shut down)
+    router.refresh();
+
+    // Error logging out
+    if (error) toast.error(error.message);
+    // Successfully logget out
+    else toast.success("Successfully Logged Out.");
   };
 
   return (
@@ -108,29 +123,53 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
 
         {/* Login Section */}
         <div className="flex justify-between items-center gap-x-4">
-          {/* Sign up Button */}
-          <div>
-            <Button
-              onClick={() => {}}
-              className={twMerge(
-                "bg-transparent",
-                "font-medium text-neutral-300"
-              )}
-            >
-              {/* !! Text does whitespace-nowrap if we wrap butto with div element*/}
-              Sign up
-            </Button>
-          </div>
+          {user ? (
+            // If user logged in
+            <div className="flex items-center gap-x-4">
+              {/* Log out Button */}
+              <Button
+                onClick={handleLogout}
+                className={twMerge("px-6 py-2", "bg-white")}
+              >
+                Log out
+              </Button>
 
-          {/* Log in Button */}
-          <div>
-            <Button
-              onClick={() => {}}
-              className={twMerge("px-6 py-2", "bg-white")}
-            >
-              Log in
-            </Button>
-          </div>
+              {/* Account Button */}
+              <Button
+                onClick={() => router.push("/account")}
+                className="bg-white"
+              >
+                <FaUserAlt />
+              </Button>
+            </div>
+          ) : (
+            // If user not logged in
+            <>
+              {/* Sign up Button */}
+              <div>
+                <Button
+                  onClick={authModal.onOpen}
+                  className={twMerge(
+                    "bg-transparent",
+                    "font-medium text-neutral-300"
+                  )}
+                >
+                  {/* !! Text does whitespace-nowrap if we wrap butto with div element*/}
+                  Sign up
+                </Button>
+              </div>
+
+              {/* Log in Button */}
+              <div>
+                <Button
+                  onClick={authModal.onOpen}
+                  className={twMerge("px-6 py-2", "bg-white")}
+                >
+                  Log in
+                </Button>
+              </div>
+            </>
+          )}
         </div>
       </div>
 
