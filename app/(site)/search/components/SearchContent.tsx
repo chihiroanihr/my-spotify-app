@@ -18,7 +18,7 @@ const SearchContent: React.FC<SearchContentProps> = ({ songs }) => {
           "flex flex-col gap-y-2",
           "w-full",
           "px-6",
-          "text-neutraol-400"
+          "text-neutral-400"
         )}
       >
         No songs found
