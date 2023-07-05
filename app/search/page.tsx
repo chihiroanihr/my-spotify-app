@@ -1,8 +1,8 @@
 import { twMerge } from "tailwind-merge";
 
-import Header from "@/components/Header";
-import SearchInput from "@/components/SearchInput";
 import SearchContent from "./components/SearchContent";
+import SearchInput from "@/components/SearchInput";
+import Header from "@/components/Header";
 import getSongsByTitle from "@/actions/getSongsByTitle";
 
 interface SearchProps {
