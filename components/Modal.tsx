@@ -34,7 +34,7 @@ const Modal: React.FC<ModalProps> = ({
             "w-full",
             "md:w-[90vw] md:max-w-[450px]",
             "h-full max-h-full",
-            "md:h-auto md:max-h-[85vh]",
+            "md:h-auto",
             "p-[25px]",
             "rounded-md",
             "border border-neutral-700",
