@@ -1,9 +1,16 @@
 import { twMerge } from "tailwind-merge";
 
+import PageContent from "./components/PageContent";
 import Header from "@/components/Header";
 import ListItem from "@/components/ListItem";
+import getAllSongs from "@/actions/getAllSongs";
 
-export default function Home() {
+export const revalidate = 0; // This page will not be cached, data will always be up-to-date.
+
+export default async function Home() {
+  // Fetch all the songs
+  const songs = await getAllSongs();
+
   return (
     <div
       className={twMerge(
@@ -44,8 +51,8 @@ export default function Home() {
           <h1 className="text-2xl font-semibold text-white">Newest songs</h1>
         </div>
 
-        {/* List of Recommended Songs */}
-        <div>List of Songs</div>
+        {/* List of All Songs (fetched from dtabase) */}
+        <PageContent songs={songs} />
       </div>
     </div>
   );
