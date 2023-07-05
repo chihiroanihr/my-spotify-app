@@ -4,6 +4,7 @@ import { twMerge } from "tailwind-merge";
 
 import { Song } from "@/types";
 import MediaItem from "@/components/MediaItem";
+import LikeButton from "@/components/LikeButton";
 
 interface SearchContentProps {
   songs: Song[];
@@ -39,6 +40,7 @@ const SearchContent: React.FC<SearchContentProps> = ({ songs }) => {
           </div>
 
           {/* Like Button */}
+          <LikeButton songId={song.id} />
         </div>
       ))}
       SearchContent
