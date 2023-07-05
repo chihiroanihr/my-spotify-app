@@ -4,9 +4,23 @@ import { twMerge } from "tailwind-merge";
 import { TbPlaylist } from "react-icons/tb";
 import { AiOutlinePlus } from "react-icons/ai";
 
+import useAuthModal from "@/hooks/useAuthModal";
+import useUploadModal from "@/hooks/useUploadModal";
+import { useUser } from "@/hooks/useUser";
+
 const Library = () => {
+  const authModal = useAuthModal();
+  const { user } = useUser();
+
+  const uploadModal = useUploadModal();
+
   const onClick = () => {
-    // handle upload
+    // First check whether user is logged in or not!
+    if (!user) return authModal.onOpen(); // open auth modal
+
+    // TODO: check for subscription
+
+    return uploadModal.onOpen(); // open upload modal
   };
 
   return (
