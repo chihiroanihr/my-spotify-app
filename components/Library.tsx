@@ -4,11 +4,17 @@ import { twMerge } from "tailwind-merge";
 import { TbPlaylist } from "react-icons/tb";
 import { AiOutlinePlus } from "react-icons/ai";
 
+import MediaItem from "./MediaItem";
 import useAuthModal from "@/hooks/useAuthModal";
 import useUploadModal from "@/hooks/useUploadModal";
 import { useUser } from "@/hooks/useUser";
+import { Song } from "@/types";
 
-const Library = () => {
+interface LibraryProps {
+  songs: Song[];
+}
+
+const Library: React.FC<LibraryProps> = ({ songs }) => {
   const authModal = useAuthModal();
   const { user } = useUser();
 
@@ -49,7 +55,9 @@ const Library = () => {
 
       {/* List of Songs */}
       <div className={twMerge("mt-4 px-3", "flex flex-col gap-y-2")}>
-        List of Songs
+        {songs.map((item) => (
+          <MediaItem key={item.id} data={item} onClick={() => {}} />
+        ))}
       </div>
     </div>
   );
