@@ -1,11 +1,12 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-import { UserDetails, Subscription } from "@/types";
 import { User } from "@supabase/auth-helpers-nextjs";
 import {
   useSessionContext,
   useUser as useSupaUser, // we use "useUser" hook as custom hook just as in filename "useUser" thus give other variable name
 } from "@supabase/auth-helpers-react";
+
+import { UserDetails, Subscription } from "@/types";
 
 type UserContextType = {
   accessToken: string | null;

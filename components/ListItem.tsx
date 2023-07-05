@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+
 import { twMerge } from "tailwind-merge";
 import { FaPlay } from "react-icons/fa";
 

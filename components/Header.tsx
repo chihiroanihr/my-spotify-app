@@ -1,7 +1,8 @@
 "use client";
 
-import { twMerge } from "tailwind-merge";
 import { useRouter } from "next/navigation";
+
+import { twMerge } from "tailwind-merge";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { toast } from "react-hot-toast";
 import { HiHome } from "react-icons/hi";

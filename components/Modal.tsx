@@ -1,6 +1,6 @@
+import { twMerge } from "tailwind-merge";
 import * as Dialog from "@radix-ui/react-dialog";
 import { IoMdClose } from "react-icons/io";
-import { twMerge } from "tailwind-merge";
 
 interface ModalProps {
   isOpen: boolean;
