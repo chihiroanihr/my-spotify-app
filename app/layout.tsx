@@ -32,7 +32,9 @@ export default async function RootLayout({
         <SupabaseProvider>
           {/* !! UserProvider must be inside SupabaseProvider */}
           <UserProvider>
+            {/* Modal */}
             <ModalProvider />
+            {/* Content */}
             <div className="flex h-full">
               <Sidebar songs={userSongs} />
               <main className="flex-1 h-full overflow-y-auto py-2">
