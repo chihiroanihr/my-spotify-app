@@ -15,6 +15,7 @@ interface SongItemProps {
 
 const SongItem: React.FC<SongItemProps> = ({ data, onClick }) => {
   const imagePath = useLoadImage(data); // Pass the song (data) as argument
+
   return (
     <div
       onClick={() => onClick(data.id)}

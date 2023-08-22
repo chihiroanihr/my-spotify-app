@@ -8,7 +8,7 @@ const useLoadImage = (song: Song) => {
 
   // If song does not exist
   if (!song) return null;
-
+  
   // If song exists then fetch its image
   const { data: imageData } = supabaseClient.storage
     .from("images") // from "images" table inside database
