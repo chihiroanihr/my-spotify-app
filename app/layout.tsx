@@ -2,6 +2,7 @@ import "./globals.css";
 import { Figtree } from "next/font/google";
 
 import Sidebar from "@/components/Sidebar";
+import Player from "@/components/Player";
 import SupabaseProvider from "@/providers/SupabaseProvider";
 import UserProvider from "@/providers/UserProvider";
 import ModalProvider from "@/providers/ModalProvider";
@@ -35,12 +36,12 @@ export default async function RootLayout({
             {/* Modal */}
             <ModalProvider />
             {/* Content */}
-            <div className="flex h-full">
-              <Sidebar songs={userSongs} />
+            <Sidebar songs={userSongs}>
               <main className="flex-1 h-full overflow-y-auto py-2">
                 {children}
               </main>
-            </div>
+            </Sidebar>
+            <Player />
           </UserProvider>
         </SupabaseProvider>
       </body>

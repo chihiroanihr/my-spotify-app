@@ -2,15 +2,18 @@
 
 import { twMerge } from "tailwind-merge";
 
-import { Song } from "@/types";
 import MediaItem from "@/components/MediaItem";
 import LikeButton from "@/components/LikeButton";
+import useOnPlay from "@/hooks/useOnPlay";
+import { Song } from "@/types";
 
 interface SearchContentProps {
   songs: Song[];
 }
 
 const SearchContent: React.FC<SearchContentProps> = ({ songs }) => {
+  const onPlay = useOnPlay(songs);
+
   // If no song is found
   if (songs.length === 0)
     return (
@@ -36,7 +39,12 @@ const SearchContent: React.FC<SearchContentProps> = ({ songs }) => {
         >
           {/* Song Info (image and title) */}
           <div className="flex-1">
-            <MediaItem data={song} onClick={() => {}} />
+            <MediaItem
+              data={song}
+              onClick={(id: string) => {
+                onPlay(id);
+              }}
+            />
           </div>
 
           {/* Like Button */}

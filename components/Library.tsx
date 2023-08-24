@@ -7,6 +7,7 @@ import { AiOutlinePlus } from "react-icons/ai";
 import MediaItem from "./MediaItem";
 import useAuthModal from "@/hooks/useAuthModal";
 import useUploadModal from "@/hooks/useUploadModal";
+import useOnPlay from "@/hooks/useOnPlay";
 import { useUser } from "@/hooks/useUser";
 import { Song } from "@/types";
 
@@ -19,6 +20,7 @@ const Library: React.FC<LibraryProps> = ({ songs }) => {
   const { user } = useUser();
 
   const uploadModal = useUploadModal();
+  const onPlay = useOnPlay(songs);
 
   const onClick = () => {
     // First check whether user is logged in or not!
@@ -56,7 +58,11 @@ const Library: React.FC<LibraryProps> = ({ songs }) => {
       {/* List of Songs */}
       <div className={twMerge("mt-4 px-3", "flex flex-col gap-y-2")}>
         {songs.map((item) => (
-          <MediaItem key={item.id} data={item} onClick={() => {}} />
+          <MediaItem
+            key={item.id}
+            data={item}
+            onClick={(id: string) => onPlay(id)}
+          />
         ))}
       </div>
     </div>

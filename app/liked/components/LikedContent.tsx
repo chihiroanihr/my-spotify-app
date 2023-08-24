@@ -7,6 +7,7 @@ import { twMerge } from "tailwind-merge";
 import MediaItem from "@/components/MediaItem";
 import LikeButton from "@/components/LikeButton";
 import { useUser } from "@/hooks/useUser";
+import useOnPlay from "@/hooks/useOnPlay";
 import { Song } from "@/types";
 
 interface LikedContentProps {
@@ -16,6 +17,8 @@ interface LikedContentProps {
 const LikedContent: React.FC<LikedContentProps> = ({ songs }) => {
   const router = useRouter();
   const { isLoading, user } = useUser();
+
+  const onPlay = useOnPlay(songs);
 
   useEffect(() => {
     // If not logged in / logged out then avoid showing Liked page
@@ -48,7 +51,7 @@ const LikedContent: React.FC<LikedContentProps> = ({ songs }) => {
         >
           {/* Song Item */}
           <div className="flex-1">
-            <MediaItem data={song} onClick={() => {}} />
+            <MediaItem data={song} onClick={(id: string) => onPlay(id)} />
           </div>
 
           {/* Liked Icon */}
